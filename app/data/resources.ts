@@ -9,9 +9,12 @@ export type Resource = {
   environment?: Environment;
 };
 
+export type CategoryId = "apps" | "github" | "other";
+
 export type ResourceSection = {
   id: string;
   label: string;
+  category: CategoryId;
   description: string;
   /** Search terms that apply to every resource in this section. */
   keywords: string[];
@@ -174,6 +177,7 @@ const otherLinks: Resource[] = [
 export const sections: ResourceSection[] = [
   {
     id: "staging",
+    category: "apps",
     label: "Staging",
     description: "Pre-release environments for testing changes",
     keywords: ["staging", "stage", "test", "apps"],
@@ -181,6 +185,7 @@ export const sections: ResourceSection[] = [
   },
   {
     id: "production",
+    category: "apps",
     label: "Production",
     description: "Live environments used by real users",
     keywords: ["production", "prod", "live", "apps"],
@@ -188,6 +193,7 @@ export const sections: ResourceSection[] = [
   },
   {
     id: "github",
+    category: "github",
     label: "GitHub Repositories",
     description: "Source code for every Humor Project service",
     keywords: ["github", "repo", "repository", "code", "source"],
@@ -195,11 +201,19 @@ export const sections: ResourceSection[] = [
   },
   {
     id: "other",
+    category: "other",
     label: "Other Links",
     description: "Team tools and supporting services",
     keywords: ["tools", "other"],
     resources: otherLinks,
   },
+];
+
+export const categories: { id: CategoryId | "all"; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "apps", label: "Applications" },
+  { id: "github", label: "GitHub Repositories" },
+  { id: "other", label: "Other Links" },
 ];
 
 export function displayUrl(href: string) {
